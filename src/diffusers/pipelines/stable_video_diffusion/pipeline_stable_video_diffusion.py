@@ -102,8 +102,8 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
         feature_extractor: CLIPImageProcessor,
     ):
         super().__init__()
-        tokenizer =  CLIPTokenizer.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K").to(next(self.image_encoder.parameters()).device)
-        text_encoder = CLIPTextModelWithProjection.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K").to("cpu")
+        tokenizer =  CLIPTokenizer.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K")
+        text_encoder = CLIPTextModelWithProjection.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K")
 
         self.register_modules(
             vae=vae,
