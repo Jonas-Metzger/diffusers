@@ -102,8 +102,8 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
         feature_extractor: CLIPImageProcessor,
     ):
         super().__init__()
-        tokenizer =  CLIPTokenizer.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K")
-        text_encoder = CLIPTextModelWithProjection.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K")
+        self.tokenizer =  CLIPTokenizer.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K")
+        self.text_encoder = CLIPTextModelWithProjection.from_pretrained("laion/CLIP-ViT-H-14-laion2B-s32B-b79K")
 
         self.register_modules(
             vae=vae,
@@ -111,8 +111,6 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
             unet=unet,
             scheduler=scheduler,
             feature_extractor=feature_extractor,
-            tokenizer=tokenizer,
-            text_encoder=text_encoder
         )
         self.vae_scale_factor = 2 ** (len(self.vae.config.block_out_channels) - 1)
         self.image_processor = VaeImageProcessor(vae_scale_factor=self.vae_scale_factor)
