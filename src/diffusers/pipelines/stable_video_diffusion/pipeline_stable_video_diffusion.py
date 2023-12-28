@@ -117,7 +117,7 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
 
     def _encode_text(self, text, device, num_videos_per_prompt, do_classifier_free_guidance):
         dtype = next(self.image_encoder.parameters()).dtype
-        if not isinstance(image, torch.Tensor):
+        if not isinstance(text, torch.Tensor):
             text = self.tokenizer(text, padding=True, return_tensors="pt")
         text = text.to(device=device, dtype=dtype)
         image_embeddings = self.text_encoder(**inputs).text_embeds.unsqueeze(1)
