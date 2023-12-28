@@ -121,7 +121,7 @@ class StableVideoDiffusionPipeline(DiffusionPipeline):
         if not isinstance(text, torch.Tensor):
             text = self.tokenizer(text, padding=True, return_tensors="pt")
         text = text.to(device=device)
-        image_embeddings = self.text_encoder(**inputs).text_embeds.unsqueeze(1).to(dtype)
+        image_embeddings = self.text_encoder(**text).text_embeds.unsqueeze(1).to(dtype)
 
         # duplicate image embeddings for each generation per prompt, using mps friendly method
         bs_embed, seq_len, _ = image_embeddings.shape
